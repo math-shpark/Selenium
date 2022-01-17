@@ -33,98 +33,98 @@ public class Practice {
 		driver.manage().window().maximize();
 
 		// 출발역
-		WebElement searchDpt = driver.findElement(By.cssSelector("#txtGoStart"));
+		WebElement searchDpt = driver.findElement(By.cssSelector("출발역 cssSelector"));
 		searchDpt.clear();
-		searchDpt.sendKeys("익산");
+		searchDpt.sendKeys("출발역 이름");
 
 		// 도착역
-		WebElement searchArr = driver.findElement(By.cssSelector("#txtGoEnd"));
+		WebElement searchArr = driver.findElement(By.cssSelector("도착역 cssSelector"));
 		searchArr.clear();
-		searchArr.sendKeys("용산");
+		searchArr.sendKeys("도착역 이름");
 
-		driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS); // 1초 대기 시간 부여
 
 		// 출발일 설정
 		driver.findElement(
-				By.cssSelector("#res_cont_tab01 > form > div > fieldset > ul:nth-child(3) > li:nth-child(1) > a > img"))
+				By.cssSelector("달력 그림 cssSelector"))
 				.click();
 		for (String handle : driver.getWindowHandles()) {
 			if (!handle.equals(mainPage)) {
-				driver.switchTo().window(handle);
+				driver.switchTo().window(handle); // 새로운 창으로 전환
 				driver.findElement(By.cssSelector(
-						"body > div > div.cont > table > tbody > tr:nth-child(2) > td:nth-child(1) > div > div > table > tbody > tr:nth-child(4) > td:nth-child(3) > a"))
+						"출발일 클릭 cssSelector"))
 						.click();
-				driver.switchTo().window(mainPage);
+				driver.switchTo().window(mainPage); // 원래 창으로 전환
 			}
 		}
 
 		// 열차 목록 조희
-		driver.findElement(By.cssSelector("#res_cont_tab01 > form > div > fieldset > p > a > img")).click();
+		driver.findElement(By.cssSelector("열차 조회 cssSelector")).click();
 
 		// 좌석 선택
-		driver.findElement(By.cssSelector("#tableResult > tbody > tr:nth-child(1) > td:nth-child(6) > a:nth-child(3)"))
+		driver.findElement(By.cssSelector("좌석 선택 버튼 cssSelector"))
 				.click();
-		driver.switchTo().frame("embeded-modal-seatmap");
-		driver.findElement(By.cssSelector("body > div > form > div > div.ck_seat > div.tra_num > p > a:nth-child(4)"))
+		driver.switchTo().frame("iframe의 id"); // 좌석 선택 창으로 전환
+		driver.findElement(By.cssSelector("호차 선택 버튼 cssSelector"))
 				.click(); // 호차 선택
-		driver.findElement(By.cssSelector("#seat_box_id > div > table > tbody > tr:nth-child(4) > td:nth-child(1)")) // 좌석
+		driver.findElement(By.cssSelector("좌석 선택 버튼 cssSelector")) // 좌석
 																														// 선택
 				.click();
-		driver.findElement(By.cssSelector("#Confirm > a")).click();
-		driver.switchTo().window(mainPage);
+		driver.findElement(By.cssSelector("확인버튼 cssSelector")).click();
+		driver.switchTo().window(mainPage); // 원래 창으로 전환
 
 		// 미등록고객예매
 		driver.findElement(By.cssSelector(
-				"#contents > div.content > div.cont_info > div.cont_login > div.box_rig > ul > li:nth-child(1) > a"))
+				"미등록 고객 버튼 cssSelector"))
 				.click();
 
 		// 비회원 발권 안내문
-		driver.switchTo().frame("embeded-modal-nomem");
-		driver.findElement(By.cssSelector("body > div > div.cont > p.btn_c > a.btn_blue_ang")).click();
-		driver.switchTo().window(mainPage);
+		driver.switchTo().frame("안내문 창 id");
+		driver.findElement(By.cssSelector("확인 버튼 cssSelector")).click();
+		driver.switchTo().window(mainPage); // 원래 창으로 전환
 
 		// 예약정보 기입
-		WebElement inputName = driver.findElement(By.name("txtCustNm"));
+		WebElement inputName = driver.findElement(By.name("이름 input의 name"));
 		inputName.sendKeys("홍길동");
 
-		WebElement inputNo1 = driver.findElement(By.name("txtCpNo2"));
+		WebElement inputNo1 = driver.findElement(By.name("휴대폰 번호 1 input의 name"));
 		inputNo1.sendKeys("1234");
 
-		WebElement inputNo2 = driver.findElement(By.name("txtCpNo3"));
+		WebElement inputNo2 = driver.findElement(By.name("휴대폰 번호 2 input의 name"));
 		inputNo2.sendKeys("5678");
 
-		WebElement email1 = driver.findElement(By.name("txtEmail_1"));
+		WebElement email1 = driver.findElement(By.name("email 1 input의 name"));
 		email1.sendKeys("hong");
 
-		WebElement email2 = driver.findElement(By.name("txtEmail_2"));
+		WebElement email2 = driver.findElement(By.name("email 2 input의 name"));
 		email2.sendKeys("naver.com");
 
-		WebElement pwd1 = driver.findElement(By.name("txtCustPw"));
+		WebElement pwd1 = driver.findElement(By.name("비밀번호 input의 name"));
 		pwd1.sendKeys("12345");
 
-		WebElement pwd2 = driver.findElement(By.name("txtReCustPw"));
+		WebElement pwd2 = driver.findElement(By.name("비밀번호 확인 input의 name"));
 		pwd2.sendKeys("12345");
 
-		driver.findElement(By.cssSelector("#radio1")).click();
+		driver.findElement(By.cssSelector("동의 체크 cssSelector")).click();
 		for (String handle : driver.getWindowHandles()) {
 			if (!handle.equals(mainPage)) {
-				driver.switchTo().window(handle);
-				driver.findElement(By.cssSelector("#hidToday")).click();
+				driver.switchTo().window(handle); // 새로운 창으로 전환
+				driver.findElement(By.cssSelector("오늘 보이지 않기 버튼 cssSelector")).click();
 				driver.switchTo().window(mainPage);
 			}
 		}
 		driver.findElement(
-				By.cssSelector("#contents > div.content > form > div > div > div:nth-child(3) > input[type=checkbox]"))
+				By.cssSelector("개인정보 동의 체크 cssSelector"))
 				.click();
 
 		// 신청하기 버튼
-		driver.findElement(By.cssSelector("#contents > div.content > form > div > p:nth-child(7) > a")).click();
+		driver.findElement(By.cssSelector("신청하기 버튼 cssSelector")).click();
 
 		// 내용 확인
-		driver.findElement(By.cssSelector("#korail-alert > div.modal-body > p:nth-child(7) > input[type=checkbox]"))
+		driver.findElement(By.cssSelector("내용 확인 버튼 cssSelector"))
 				.click();
-		driver.findElement(By.cssSelector("#okBtn")).click();
-		driver.findElement(By.cssSelector("#btn_next")).click();
+		driver.findElement(By.cssSelector("확인 버튼 cssSelector")).click();
+		driver.findElement(By.cssSelector("다음 버튼 cssSelector")).click();
 
 	}
 
